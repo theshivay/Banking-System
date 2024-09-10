@@ -1,0 +1,37 @@
+#include "Account.h"
+#include <iostream>
+
+Account::Account(int accNumber, std::string name, double initialBalance)
+    : accountNumber(accNumber), accountHolderName(name), balance(initialBalance) {}
+
+int Account::getAccountNumber() const {
+    return accountNumber;
+}
+
+std::string Account::getAccountHolderName() const {
+    return accountHolderName;
+}
+
+double Account::getBalance() const {
+    return balance;
+}
+
+void Account::deposit(double amount) {
+    if (amount > 0) {
+        balance += amount;
+        std::cout << "Deposit successful. New balance: " << balance << std::endl;
+    } else {
+        std::cout << "Invalid deposit amount." << std::endl;
+    }
+}
+
+bool Account::withdraw(double amount) {
+    if (amount > 0 && amount <= balance) {
+        balance -= amount;
+        std::cout << "Withdrawal successful. New balance: " << balance << std::endl;
+        return true;
+    } else {
+        std::cout << "Invalid withdrawal amount or insufficient funds." << std::endl;
+        return false;
+    }
+}

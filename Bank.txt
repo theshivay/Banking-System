@@ -1,0 +1,50 @@
+#include "Bank.h"
+#include <iostream>
+#include <algorithm>
+
+Bank::Bank() : nextAccountNumber(1000) {}
+
+void Bank::createAccount(const std::string& name, double initialBalance) {
+    accounts.emplace_back(nextAccountNumber, name, initialBalance);
+    std::cout << "Account created successfully. Account number: " << nextAccountNumber << std::endl;
+    nextAccountNumber++;
+}
+
+void Bank::deposit(int accountNumber, double amount) {
+    auto it = std::find_if(accounts.begin(), accounts.end(),
+                           [accountNumber](const Account& acc) { return acc.getAccountNumber() == accountNumber; });
+    if (it != accounts.end()) {
+        it->deposit(amount);
+    } else {
+        std::cout << "Account not found." << std::endl;
+    }
+}
+
+void Bank::withdraw(int accountNumber, double amount) {
+    auto it = std::find_if(accounts.begin(), accounts.end(),
+                           [accountNumber](const Account& acc) { return acc.getAccountNumber() == accountNumber; });
+    if (it != accounts.end()) {
+        it->withdraw(amount);
+    } else {
+        std::cout << "Account not found." << std::endl;
+    }
+}
+
+void Bank::checkBalance(int accountNumber) {
+    auto it = std::find_if(accounts.begin(), accounts.end(),
+                           [accountNumber](const Account& acc) { return acc.getAccountNumber() == accountNumber; });
+    if (it != accounts.end()) {
+        std::cout << "Account balance: " << it->getBalance() << std::endl;
+    } else {
+        std::cout << "Account not found." << std::endl;
+    }
+}
+
+void Bank::listAllAccounts() {
+    std::cout << "All Accounts:\n";
+    for (const auto& acc : accounts) {
+        std::cout << "Account Number: " << acc.getAccountNumber()
+                  << ", Name: " << acc.getAccountHolderName()
+                  << ", Balance: " << acc.getBalance() << std::endl;
+    }
+}
