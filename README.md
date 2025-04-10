@@ -1,7 +1,3 @@
-Based on the information provided, the repository "Banking-System" is written entirely in C++. Below is an example of a README template for your project:
-
----
-
 # Banking System
 
 A simple banking system project implemented in C++.
